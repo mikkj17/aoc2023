@@ -12,5 +12,5 @@ private fun second(inp: String): Int {
     throw NotImplementedError()
 }
 
-println(first(input))
-println(second(input))
+println(first(testInput))
+println(second(testInput))
