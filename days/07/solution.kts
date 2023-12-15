@@ -1,16 +1,6 @@
 import java.io.File
 
-val testInput = """
-    32T3K 765
-    T55J5 684
-    KK677 28
-    KTJJT 220
-    QQQJA 483
-""".trimIndent()
-
-val input = File("input.txt").readText()
-
-private enum class Type {
+enum class Type {
     HIGH_CARD,
     ONE_PAIR,
     TWO_PAIR,
@@ -20,9 +10,16 @@ private enum class Type {
     FIVE_KIND,
 }
 
-private data class Hand(val cards: String, val bid: Int, val jokers: Boolean) : Comparable<Hand> {
-    val labels = (if (!jokers) "AKQJT98765432" else "AKQT98765432J").reversed()
-    val type = if (!jokers) getType(cards) else labels.maxOf { getType(cards.replace("J", it.toString())) }
+data class Hand(val cards: String, val bid: Int, val jokers: Boolean) : Comparable<Hand> {
+    private val labels
+        get() = (if (!jokers) "AKQJT98765432" else "AKQT98765432J").reversed()
+    private val type: Type
+        get() {
+            return if (!jokers)
+                getType(cards)
+            else
+                labels.maxOf { getType(cards.replace("J", it.toString())) }
+        }
 
     companion object {
         private fun getType(cards: String): Type {
@@ -38,37 +35,39 @@ private data class Hand(val cards: String, val bid: Int, val jokers: Boolean) : 
     }
 
     override fun compareTo(other: Hand): Int {
-        if (this.type != other.type) {
-            return this.type.compareTo(other.type)
+        if (type != other.type) {
+            return type.compareTo(other.type)
         }
 
-        for ((thisCard, otherCard) in this.cards.zip(other.cards)) {
-            if (thisCard != otherCard) {
-                return labels.indexOf(thisCard).compareTo(labels.indexOf(otherCard))
+        for ((card, otherCard) in cards.zip(other.cards)) {
+            if (card != otherCard) {
+                return labels.indexOf(card).compareTo(labels.indexOf(otherCard))
             }
         }
 
-        throw AssertionError("Should not get to this point...")
+        throw AssertionError("Identical hands: $cards and ${other.cards}")
     }
 }
 
-private fun parse(inp: String, jokers: Boolean): List<Hand> {
+fun parse(inp: String, jokers: Boolean): List<Hand> {
     return inp.lines().map { line ->
         val (cards, bid) = line.split(" ")
         Hand(cards, bid.toInt(), jokers)
     }
 }
 
-private fun compute(inp: String, jokers: Boolean): Int {
+fun compute(inp: String, jokers: Boolean): Int {
     return parse(inp, jokers)
         .sorted()
         .mapIndexed { index, hand -> (index + 1) * hand.bid }
         .sum()
 }
 
-private fun first(inp: String): Int = compute(inp, false)
+fun first(inp: String): Int = compute(inp, false)
 
-private fun second(inp: String): Int = compute(inp, true)
+fun second(inp: String): Int = compute(inp, true)
 
+val testInput = File("test-input.txt").readText()
+val input = File("input.txt").readText()
 println(first(input))
 println(second(input))

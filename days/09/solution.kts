@@ -1,20 +1,12 @@
 import java.io.File
 
-val testInput = """
-    0 3 6 9 12 15
-    1 3 6 10 15 21
-    10 13 16 21 30 45
-""".trimIndent()
-
-val input = File("input.txt").readText()
-
-private fun parse(inp: String): List<MutableList<Int>> {
+fun parse(inp: String): List<MutableList<Int>> {
     return inp.lines().map { line ->
         line.split(" ").map { it.toInt() }.toMutableList()
     }
 }
 
-private fun findDifferences(differences: MutableList<MutableList<Int>>): List<MutableList<Int>> {
+fun findDifferences(differences: MutableList<MutableList<Int>>): List<MutableList<Int>> {
     val latest = differences.last()
     if (latest.all { it == 0 }) {
         return differences
@@ -24,7 +16,7 @@ private fun findDifferences(differences: MutableList<MutableList<Int>>): List<Mu
     return findDifferences(differences)
 }
 
-private fun computeNextValue(history: MutableList<Int>): Int {
+fun computeNextValue(history: MutableList<Int>): Int {
     val differences = findDifferences(mutableListOf(history))
     differences.last().add(0)
 
@@ -35,13 +27,15 @@ private fun computeNextValue(history: MutableList<Int>): Int {
     return differences.first().last()
 }
 
-private fun first(inp: String): Int {
+fun first(inp: String): Int {
     return parse(inp).sumOf { computeNextValue(it) }
 }
 
-private fun second(inp: String): Int {
+fun second(inp: String): Int {
     return parse(inp).sumOf { computeNextValue(it.reversed().toMutableList()) }
 }
 
+val testInput = File("test-input.txt").readText()
+val input = File("input.txt").readText()
 println(first(input))
 println(second(input))

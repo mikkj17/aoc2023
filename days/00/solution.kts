@@ -1,16 +1,14 @@
 import java.io.File
 
-val testInput = ""
+fun first(inp: String): Int {
+    throw NotImplementedError()
+}
 
+fun second(inp: String): Int {
+    throw NotImplementedError()
+}
+
+val testInput = File("test-input.txt").readText()
 val input = File("input.txt").readText()
-
-private fun first(inp: String): Int {
-    throw NotImplementedError()
-}
-
-private fun second(inp: String): Int {
-    throw NotImplementedError()
-}
-
 println(first(testInput))
 println(second(testInput))

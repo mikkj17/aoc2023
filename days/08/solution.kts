@@ -1,42 +1,7 @@
 import java.io.File
 import kotlin.math.max
 
-val testInput = """
-    RL
-
-    AAA = (BBB, CCC)
-    BBB = (DDD, EEE)
-    CCC = (ZZZ, GGG)
-    DDD = (DDD, DDD)
-    EEE = (EEE, EEE)
-    GGG = (GGG, GGG)
-    ZZZ = (ZZZ, ZZZ)
-""".trimIndent()
-
-val testInput2 = """
-    LLR
-
-    AAA = (BBB, BBB)
-    BBB = (AAA, ZZZ)
-    ZZZ = (ZZZ, ZZZ)
-""".trimIndent()
-
-val testInput3 = """
-    LR
-
-    11A = (11B, XXX)
-    11B = (XXX, 11Z)
-    11Z = (11B, XXX)
-    22A = (22B, XXX)
-    22B = (22C, 22C)
-    22C = (22Z, 22Z)
-    22Z = (22B, 22B)
-    XXX = (XXX, XXX)
-""".trimIndent()
-
-val input = File("input.txt").readText()
-
-private data class Network(
+data class Network(
     val instructions: String,
     val nodes: Map<String, Pair<String, String>>
 ) {
@@ -56,23 +21,23 @@ private data class Network(
     }
 }
 
-private fun parse(inp: String): Network {
+fun parse(inp: String): Network {
     val (instructions, networkString) = inp.split("\n\n")
     val nodes = Regex("""(\w{3}) = \((\w{3}), (\w{3})\)""").findAll(networkString).associate { matchResult ->
         val (from, left, right) = matchResult.groupValues.drop(1)
-        Pair(from, Pair(left, right))
+        Pair(from, left to right)
     }
 
     return Network(instructions, nodes)
 }
 
-private fun first(inp: String): Long {
+fun first(inp: String): Long {
     val network = parse(inp)
 
     return network.stepsToGoal("AAA") { it == "ZZZ" }
 }
 
-private fun lcm(a: Long, b: Long): Long {
+fun lcm(a: Long, b: Long): Long {
     val larger = max(a, b)
     val maxLcm = a * b
     var lcm = larger
@@ -85,7 +50,7 @@ private fun lcm(a: Long, b: Long): Long {
     return maxLcm
 }
 
-private fun second(inp: String): Long {
+fun second(inp: String): Long {
     val network = parse(inp)
 
     return network.nodes.keys
@@ -94,5 +59,7 @@ private fun second(inp: String): Long {
         .reduce { acc, x -> lcm(acc, x) }
 }
 
+val testInput = File("test-input.txt").readText()
+val input = File("input.txt").readText()
 println(first(input))
 println(second(input))
