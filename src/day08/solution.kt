@@ -1,3 +1,5 @@
+package day08
+
 import java.io.File
 import kotlin.math.max
 
@@ -59,7 +61,9 @@ fun second(inp: String): Long {
         .reduce { acc, x -> lcm(acc, x) }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day08/test-input.txt").readText()
+    val input = File("src/day08/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

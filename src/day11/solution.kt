@@ -1,4 +1,5 @@
-import Solution.Position
+package day11
+
 import java.io.File
 import kotlin.math.abs
 
@@ -59,7 +60,9 @@ fun first(inp: String) = compute(inp, 2)
 
 fun second(inp: String) = compute(inp, 1_000_000)
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day11/test-input.txt").readText()
+    val input = File("src/day11/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

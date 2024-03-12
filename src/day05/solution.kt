@@ -1,3 +1,5 @@
+package day05
+
 import java.io.File
 
 data class Almanac(val seeds: Set<Long>, val maps: List<List<Range>>) {
@@ -44,7 +46,9 @@ fun second(inp: String): Long {
     }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day05/test-input.txt").readText()
+    val input = File("src/day05/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

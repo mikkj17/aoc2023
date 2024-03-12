@@ -1,3 +1,5 @@
+package day04
+
 import java.io.File
 import kotlin.math.pow
 
@@ -37,7 +39,9 @@ fun second(inp: String): Int {
     return cards.indices.sumOf { numberOfScratchCards(cards, it) }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day04/test-input.txt").readText()
+    val input = File("src/day04/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

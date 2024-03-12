@@ -1,3 +1,5 @@
+package day01
+
 import java.io.File
 
 fun first(inp: String): Int {
@@ -21,8 +23,10 @@ fun second(inp: String): Int {
     }
 }
 
-val testInput = File("test-input.txt").readText()
-val testInput2 = File("test-input2.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day01/test-input.txt").readText()
+    val testInput2 = File("src/day01/test-input2.txt").readText()
+    val input = File("src/day01/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

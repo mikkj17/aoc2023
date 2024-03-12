@@ -1,3 +1,5 @@
+package day12
+
 import java.io.File
 
 data class ConditionRecord(val springs: String, val groups: List<Int>) {
@@ -17,7 +19,7 @@ data class ConditionRecord(val springs: String, val groups: List<Int>) {
                 var result = 0L
 
                 val firstChar = springs.first()
-                // operational: remove first spring and check the rest
+                // operational: remove `00`.first spring and check the rest
                 if (firstChar in ".?") {
                     result += count(springs.drop(1), groups)
                 }
@@ -62,7 +64,9 @@ fun computeArrangements(inp: String, unfolds: Int) = parse(inp, unfolds).sumOf {
 fun first(inp: String) = computeArrangements(inp, 1)
 fun second(inp: String) = computeArrangements(inp, 5)
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day12/test-input.txt").readText()
+    val input = File("src/day12/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

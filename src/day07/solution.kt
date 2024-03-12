@@ -1,3 +1,5 @@
+package day07
+
 import java.io.File
 
 enum class Type {
@@ -67,7 +69,9 @@ fun first(inp: String): Int = compute(inp, false)
 
 fun second(inp: String): Int = compute(inp, true)
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day07/test-input.txt").readText()
+    val input = File("src/day07/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

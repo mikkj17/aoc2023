@@ -1,4 +1,5 @@
-import Solution.Position
+package day10
+
 import java.io.File
 
 typealias Position = Pair<Int, Int>
@@ -102,7 +103,9 @@ fun second(inp: String): Int {
     return numberOfEnclosed
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day10/test-input.txt").readText()
+    val input = File("src/day10/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

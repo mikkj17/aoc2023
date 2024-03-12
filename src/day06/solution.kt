@@ -1,3 +1,5 @@
+package day06
+
 import java.io.File
 
 data class Race(val time: Long, val record: Long) {
@@ -33,7 +35,9 @@ fun second(inp: String): Int {
         .waysToBeatRecord()
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day06/test-input.txt").readText()
+    val input = File("src/day06/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

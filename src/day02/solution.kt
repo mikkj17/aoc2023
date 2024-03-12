@@ -1,3 +1,5 @@
+package day02
+
 import java.io.File
 
 data class Cube(val color: String, val count: Int)
@@ -36,7 +38,9 @@ fun second(inp: String): Int {
     }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day02/test-input.txt").readText()
+    val input = File("src/day02/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

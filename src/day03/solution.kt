@@ -1,4 +1,5 @@
-import Solution.Position
+package day03
+
 import java.io.File
 import kotlin.math.abs
 
@@ -75,7 +76,9 @@ fun second(inp: String): Int {
     return gears.sumOf { (first, last) -> first.number * last.number }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day03/test-input.txt").readText()
+    val input = File("src/day03/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}

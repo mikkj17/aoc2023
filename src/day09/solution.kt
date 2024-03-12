@@ -1,3 +1,5 @@
+package day09
+
 import java.io.File
 
 fun parse(inp: String): List<MutableList<Int>> {
@@ -35,7 +37,9 @@ fun second(inp: String): Int {
     return parse(inp).sumOf { computeNextValue(it.reversed().toMutableList()) }
 }
 
-val testInput = File("test-input.txt").readText()
-val input = File("input.txt").readText()
-println(first(input))
-println(second(input))
+fun main() {
+    val testInput = File("src/day09/test-input.txt").readText()
+    val input = File("src/day09/input.txt").readText()
+    println(first(input))
+    println(second(input))
+}
