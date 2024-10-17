@@ -2,14 +2,8 @@ package day15
 
 import java.io.File
 
-fun hash(value: String): Int {
-    var digest = 0
-    value.forEach {
-        digest += it.code
-        digest *= 17
-        digest %= 256
-    }
-    return digest
+fun hash(value: String) = value.fold(0) { acc, c ->
+    (acc + c.code) * 17 % 256
 }
 
 fun first(inp: String): Int {
